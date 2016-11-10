@@ -14,6 +14,7 @@ public class Question_13 extends ScreenAdapter{
 	Lives lives;
 	Texture question_13;
 	Skip skip;
+	SoundFx sound;
 	
 	Rectangle ans1,ans2,ans3,ans4,skipButton;
 	Vector2 touchPoint;
@@ -25,6 +26,7 @@ public class Question_13 extends ScreenAdapter{
 		question_13 = new Texture("question_13.png");
 		lives = new Lives();
 		skip = new Skip();
+		sound = new SoundFx();
 		
 		touchPoint = new Vector2();
 		ans1 = new Rectangle( 130, 400 - 120, 300, 120);
@@ -57,26 +59,31 @@ public class Question_13 extends ScreenAdapter{
 			
 			if(ans1.contains(touchPoint))
 			{
+				sound.playSoundNope();
 				lives.wrong();
 			}
 			
 			if(ans2.contains(touchPoint))
 			{
+				sound.playSoundNope();
 				lives.wrong();	
 			}
 			
 			if(ans3.contains(touchPoint))
 			{
+				sound.playSoundCorrect();
 				game.setScreen(new Question_14(game));
 			}
 			
 			if(ans4.contains(touchPoint))
 			{
+				sound.playSoundNope();
 				lives.wrong();	
 			}
 			
 			if(skipButton.contains(touchPoint) && skip.canSkip())
 			{
+				sound.playSkipSound();
 				skip.useSkip();
 				game.setScreen(new Question_14(game));
 			}

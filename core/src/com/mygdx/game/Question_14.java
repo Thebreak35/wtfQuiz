@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +15,7 @@ public class Question_14 extends ScreenAdapter{
 	Lives lives;
 	Texture question_14;
 	Skip skip;
+	SoundFx sound;
 	
 	Rectangle ans1,ans2,ans3,ans4,skipButton;
 	Vector2 touchPoint;
@@ -22,9 +24,10 @@ public class Question_14 extends ScreenAdapter{
 	{
 		this.game = game;
 		batch = new SpriteBatch();
-		question_14 = new Texture("question_12.png");
+		question_14 = new Texture("question_14.png");
 		lives = new Lives();
 		skip = new Skip();
+		sound = new SoundFx();
 		
 		touchPoint = new Vector2();
 		ans1 = new Rectangle( 130, 400 - 120, 300, 120);
@@ -37,53 +40,32 @@ public class Question_14 extends ScreenAdapter{
 	@Override
 	public void render(float delta)
 	{
-//		update();
+		update();
 	
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	
-//		render();
+		render();
 	}
 	
 	private void update()
 	{
+		if(Gdx.input.isKeyJustPressed(Keys.F5)) {
+			sound.playSoundCorrect();
+			game.setScreen(new Question_15(game));
+		}
 		if(Gdx.input.justTouched())
 		{
 			touchPoint.x = Gdx.input.getX();
 			touchPoint.y = Gdx.input.getY();
-			
-//			System.out.println(touchPoint);
-			
-			
-			if(ans1.contains(touchPoint))
-			{
-				lives.wrong();
-			}
-			
-			if(ans2.contains(touchPoint))
-			{
-				lives.wrong();	
-			}
-			
-			if(ans3.contains(touchPoint))
-			{
-				lives.wrong();
-			}
-			
-			if(ans4.contains(touchPoint))
-			{
-				game.setScreen(new Question_14(game));
-			}
-			
+					
 			if(skipButton.contains(touchPoint) && skip.canSkip())
 			{
+				sound.playSkipSound();
 				skip.useSkip();
-				game.setScreen(new Question_14(game));
+				game.setScreen(new Question_15(game));
 			}
 			
-//			System.out.println(lives.hp);
-//			System.out.println(lives.getLives());
-//			System.out.println(lives.isLive());
 		}
 		if(!lives.isLive())
 		{

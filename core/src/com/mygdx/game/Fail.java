@@ -12,6 +12,7 @@ public class Fail extends ScreenAdapter{
 	SpriteBatch batch;
 	Lives lives;
 	Skip skip;
+	SoundFx sound;
 	
 	public Fail(Game game)
 	{
@@ -20,6 +21,9 @@ public class Fail extends ScreenAdapter{
 		bg = new Texture("fail.png");
 		lives = new Lives();
 		skip = new Skip();
+		sound = new SoundFx();
+		
+		sound.playSoundSad(1);
 	}
 	
 	@Override
@@ -37,6 +41,7 @@ public class Fail extends ScreenAdapter{
 	{
 		if(Gdx.input.justTouched())
 		{
+			sound.playSoundSad(0);
 			lives.setNewLives();
 			skip.setNewSkip();
 			game.setScreen(new MainMenuScreen(game));

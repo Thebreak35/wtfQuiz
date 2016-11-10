@@ -8,6 +8,7 @@ public class MainMenuWorld {
 	Game game;
 	Vector2 touchPoint;
 	Rectangle start;
+	SoundFx sound;
 	
 	public static boolean isTouchStart;
 	
@@ -16,6 +17,9 @@ public class MainMenuWorld {
 		touchPoint = new Vector2();
 		start = new Rectangle( 375, 720 - 320 - 120, 300 ,120 );
 		isTouchStart = false;
+		sound = new SoundFx();
+		
+		sound.playIntroSound(1);
 	}
 	
 	public void update()
@@ -26,6 +30,7 @@ public class MainMenuWorld {
 			touchPoint.y = Gdx.input.getY();
 			if(start.contains(touchPoint))
 			{
+				sound.playIntroSound(0);
 				isTouchStart = true;
 			}
 		}
