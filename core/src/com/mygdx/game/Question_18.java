@@ -8,22 +8,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Question_1 extends ScreenAdapter{
+public class Question_18 extends ScreenAdapter{
 	Game game;
 	SpriteBatch batch;
-	Texture question_1;
+	Texture question_18,question_18_2;
 	Lives lives;
 	Skip skip;
 	SoundFx sound;
+	private static int n = 1;
 	
-	Rectangle ans1,ans2,ans3,ans4,skipButton;
+	Rectangle ans1,ans2,ans3,ans4,skipButton,trueAnswer;
 	Vector2 touchPoint;
 	
-	public Question_1(Game game) 
+	public Question_18(Game game) 
 	{
 		this.game = game;
 		batch = new SpriteBatch();
-		question_1 = new Texture("question_1.png");
+		question_18 = new Texture("question_18.png");
+		question_18_2 = new Texture("question_18_2.png");
 		lives = new Lives();
 		skip = new Skip();
 		sound = new SoundFx();
@@ -34,6 +36,7 @@ public class Question_1 extends ScreenAdapter{
 		ans3 = new Rectangle( 130, 400 - 120 + 175, 300, 120);
 		ans4 = new Rectangle( 625, 400 - 120 + 175, 300, 120);
 		skipButton = new Rectangle(180 + 700,720 - 60 - 20 ,150 ,60);
+		trueAnswer = new Rectangle(220, 170 - 7, 50, 14);
 		
 	}
 	
@@ -50,29 +53,24 @@ public class Question_1 extends ScreenAdapter{
 	
 	private void update()
 	{
+		touchPoint.x = Gdx.input.getX();
+		touchPoint.y = Gdx.input.getY();
+		
+		System.out.println(touchPoint);
+		
+		if(trueAnswer.contains(touchPoint)) {
+			n = 0;
+		}
+		else {
+			n = 1;
+		}
+		
 		if( Gdx.input.justTouched() ) {
-			touchPoint.x = Gdx.input.getX();
-			touchPoint.y = Gdx.input.getY();
+//			touchPoint.x = Gdx.input.getX();
+//			touchPoint.y = Gdx.input.getY();
 			
 //			System.out.println(touchPoint);
-			
-			
-			if( ans1.contains(touchPoint) ) {
-				sound.playSoundNope();
-				lives.wrong();
-			}
-			
-			if( ans2.contains(touchPoint) ) {
-				sound.playSoundNope();
-				lives.wrong();
-			}
-			
-			if( ans3.contains(touchPoint) ) {
-				sound.playSoundNope();
-				lives.wrong();
-			}
-			
-			if( ans4.contains(touchPoint) ) {
+			if(trueAnswer.contains(touchPoint)) {
 				sound.playSoundCorrect();
 				game.setScreen( new Question_2(game) );
 			}
@@ -94,10 +92,21 @@ public class Question_1 extends ScreenAdapter{
 	}
 	
 	private void render() {
-		batch.begin();
-		batch.draw(question_1, 0, 0);
-		batch.end();
+		changPicture(n);
 		lives.renderLives();
 		skip.renderSkip();
+	}
+	
+	private void changPicture(int inp) {
+		if (inp == 0) {
+			batch.begin();
+			batch.draw(question_18_2, 0, 0);
+			batch.end();
+		}
+		else {
+			batch.begin();
+			batch.draw(question_18, 0, 0);
+			batch.end();
+		}
 	}
 }
