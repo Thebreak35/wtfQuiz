@@ -53,6 +53,7 @@ public class Question_14 extends ScreenAdapter{
 		if(Gdx.input.isKeyJustPressed(Keys.F5)) {
 			sound.playSoundCorrect();
 			game.setScreen(new Question_15(game));
+			dispose();
 		}
 		if(Gdx.input.justTouched())
 		{
@@ -64,12 +65,14 @@ public class Question_14 extends ScreenAdapter{
 				sound.playSkipSound();
 				skip.useSkip();
 				game.setScreen(new Question_15(game));
+				dispose();
 			}
 			
 		}
 		if(!lives.isLive())
 		{
 			game.setScreen(new Fail(game));
+			dispose();
 		}
 	}
 	

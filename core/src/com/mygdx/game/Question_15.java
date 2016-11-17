@@ -52,6 +52,7 @@ public class Question_15 extends ScreenAdapter{
 			changeQuestion();
 			if(( tEnd - tStart ) / 1000 > 12) {
 				game.setScreen(new Question_16(game));
+				dispose();
 			}
 		}
 		if(Gdx.input.justTouched())
@@ -74,23 +75,12 @@ public class Question_15 extends ScreenAdapter{
 				lives.wrong();
 			}
 			
-//			if(ans3.contains(touchPoint))
-//			{
-//				sound.playSoundNope();
-//				lives.wrong();
-//			}
-//			
-//			if(ans4.contains(touchPoint))
-//			{
-//				sound.playSoundCorrect();
-//				game.setScreen(new Question_2(game));
-//			}
-			
 			if(skipButton.contains(touchPoint) && skip.canSkip())
 			{
 				sound.playSkipSound();
 				skip.useSkip();
 				game.setScreen(new Question_16(game));
+				dispose();
 			}
 		}
 	}

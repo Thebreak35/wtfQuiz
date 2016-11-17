@@ -37,6 +37,7 @@ public class Fail extends ScreenAdapter{
 		render();
 	}
 	
+	
 	private void update()
 	{
 		if(Gdx.input.justTouched())
@@ -44,6 +45,8 @@ public class Fail extends ScreenAdapter{
 			sound.playSoundSad(0);
 			lives.setNewLives();
 			skip.setNewSkip();
+//			this.dispose();
+			dispose();
 			game.setScreen(new MainMenuScreen(game));
 		}
 	}

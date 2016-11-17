@@ -58,6 +58,7 @@ public class Question_10 extends ScreenAdapter{
 				sound.playSoundCorrect();
 				skip.checkPoint();
 				game.setScreen(new Question_11(game));
+				this.dispose();
 			}
 			else {
 				lives.wrong();
@@ -71,6 +72,7 @@ public class Question_10 extends ScreenAdapter{
 		if(!lives.isLive())
 		{
 			game.setScreen(new Fail(game));
+			this.dispose();
 		}
 	}
 	

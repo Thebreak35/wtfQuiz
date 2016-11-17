@@ -56,7 +56,7 @@ public class Question_18 extends ScreenAdapter{
 		touchPoint.x = Gdx.input.getX();
 		touchPoint.y = Gdx.input.getY();
 		
-		System.out.println(touchPoint);
+//		System.out.println(touchPoint);
 		
 		if(trueAnswer.contains(touchPoint)) {
 			n = 0;
@@ -70,15 +70,18 @@ public class Question_18 extends ScreenAdapter{
 //			touchPoint.y = Gdx.input.getY();
 			
 //			System.out.println(touchPoint);
+			
 			if(trueAnswer.contains(touchPoint)) {
 				sound.playSoundCorrect();
-				game.setScreen( new Question_2(game) );
+				game.setScreen( new Question_19(game) );
+				dispose();
 			}
 			
 			if( skipButton.contains(touchPoint) && skip.canSkip() ) {
 				sound.playSkipSound();
 				skip.useSkip();
-				game.setScreen( new Question_2(game) );
+				game.setScreen( new Question_19(game) );
+				dispose();
 			}
 			
 //			System.out.println(lives.hp);
@@ -88,6 +91,7 @@ public class Question_18 extends ScreenAdapter{
 		
 		if( !lives.isLive() ) {
 			game.setScreen(new Fail(game));
+			dispose();
 		}
 	}
 	

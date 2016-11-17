@@ -28,7 +28,8 @@ public class MainMenuScreen extends ScreenAdapter{
 		
 		if(mainMenuWorld.isTouchStart)
 		{
-			game.setScreen(new Question_1(game));
+			this.dispose();
+			game.setScreen(new Question_1(game));	
 		}
 		
 		Gdx.gl.glClearColor(0, 0, 0, 1);

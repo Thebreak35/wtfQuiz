@@ -61,6 +61,7 @@ public class Question_5 extends ScreenAdapter{
 			{
 				sound.playSoundCorrect();
 				game.setScreen(new Question_6(game));
+				dispose();
 			}
 			
 			if(ans2.contains(touchPoint))
@@ -86,6 +87,7 @@ public class Question_5 extends ScreenAdapter{
 				sound.playSkipSound();
 				skip.useSkip();
 				game.setScreen(new Question_6(game));
+				dispose();
 			}
 			
 //			System.out.println(lives.hp);
@@ -95,6 +97,7 @@ public class Question_5 extends ScreenAdapter{
 		if(!lives.isLive())
 		{
 			game.setScreen(new Fail(game));
+			dispose();
 		}
 	}
 	

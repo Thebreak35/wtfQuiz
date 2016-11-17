@@ -74,13 +74,15 @@ public class Question_1 extends ScreenAdapter{
 			
 			if( ans4.contains(touchPoint) ) {
 				sound.playSoundCorrect();
-				game.setScreen( new Question_2(game) );
+				this.dispose();
+				game.setScreen(new Question_2(game));
 			}
 			
 			if( skipButton.contains(touchPoint) && skip.canSkip() ) {
 				sound.playSkipSound();
 				skip.useSkip();
-				game.setScreen( new Question_2(game) );
+				this.dispose();
+				game.setScreen(new Question_2(game));
 			}
 			
 //			System.out.println(lives.hp);
@@ -89,6 +91,7 @@ public class Question_1 extends ScreenAdapter{
 		}
 		
 		if( !lives.isLive() ) {
+			this.dispose();
 			game.setScreen(new Fail(game));
 		}
 	}

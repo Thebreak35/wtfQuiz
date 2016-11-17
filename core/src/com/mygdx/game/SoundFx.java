@@ -13,6 +13,7 @@ public class SoundFx {
 	Sound introSound;
 	Sound skipSound;
 	Sound BGMusic;
+	Sound applause;
 	
 	
 	public SoundFx() {
@@ -21,6 +22,7 @@ public class SoundFx {
 		sadSound = Gdx.audio.newSound(Gdx.files.internal("sad.mp3"));
 		introSound = Gdx.audio.newSound(Gdx.files.internal("intro.mp3"));
 		skipSound = Gdx.audio.newSound(Gdx.files.internal("skip.mp3"));
+		applause = Gdx.audio.newSound(Gdx.files.internal("applause.mp3"));
 //		BGMusic = Gdx.audio.newSound(Gdx.files.internal("bgmusic.mp3"));
 	}
 	
@@ -52,6 +54,10 @@ public class SoundFx {
 	
 	public void playSkipSound() {
 		skipSound.play();
+	}
+	
+	public void playApplauseSound() {
+		applause.play();
 	}
 	
 //	public void playBGMusic(int inp) {

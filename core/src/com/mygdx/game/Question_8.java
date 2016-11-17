@@ -72,7 +72,8 @@ public class Question_8 extends ScreenAdapter{
 			if(ans3.contains(touchPoint))
 			{
 				sound.playSoundCorrect();
-				game.setScreen(new Question_9(game));			
+				game.setScreen(new Question_9(game));	
+				dispose();
 			}
 			
 			if(ans4.contains(touchPoint))
@@ -86,6 +87,7 @@ public class Question_8 extends ScreenAdapter{
 				sound.playSkipSound();
 				skip.useSkip();
 				game.setScreen(new Question_9(game));
+				dispose();
 			}
 //			System.out.println(lives.hp);
 //			System.out.println(lives.getLives());
@@ -94,6 +96,7 @@ public class Question_8 extends ScreenAdapter{
 		if(!lives.isLive())
 		{
 			game.setScreen(new Fail(game));
+			dispose();
 		}
 	}
 	

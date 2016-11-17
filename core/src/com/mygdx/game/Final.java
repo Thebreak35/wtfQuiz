@@ -8,33 +8,28 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Question_3 extends ScreenAdapter{
-	
+public class Final extends ScreenAdapter {
 	Game game;
 	SpriteBatch batch;
-	Texture question_3;
-	Lives lives;
-	Skip skip;
+	Texture finalPic;
 	SoundFx sound;
 	
-	Rectangle ans1,ans2,ans3,ans4,skipButton;
+	Rectangle ans3,ans4;
 	Vector2 touchPoint;
 	
-	public Question_3(Game game) 
+	public Final(Game game) 
 	{
 		this.game = game;
 		batch = new SpriteBatch();
-		question_3 = new Texture("question_3.png");
-		lives = new Lives();
-		skip = new Skip();
+		finalPic = new Texture("final.png");
 		sound = new SoundFx();
 		
 		touchPoint = new Vector2();
-		ans1 = new Rectangle( 130, 400 - 120, 300, 120);
-		ans2 = new Rectangle( 625, 400 - 120, 300, 120);
 		ans3 = new Rectangle( 130, 400 - 120 + 175, 300, 120);
 		ans4 = new Rectangle( 625, 400 - 120 + 175, 300, 120);
-		skipButton = new Rectangle(180 + 700,720 - 60 - 20 ,150 ,60);
+		
+		sound.playApplauseSound();
+		
 	}
 	
 	@Override
@@ -50,64 +45,34 @@ public class Question_3 extends ScreenAdapter{
 	
 	private void update()
 	{
-		if(Gdx.input.justTouched())
-		{
+		if( Gdx.input.justTouched() ) {
 			touchPoint.x = Gdx.input.getX();
 			touchPoint.y = Gdx.input.getY();
 			
 //			System.out.println(touchPoint);
 			
 			
-			if(ans1.contains(touchPoint))
-			{
-				sound.playSoundNope();
-				lives.wrong();
-			}
-			
-			if(ans2.contains(touchPoint))
-			{
+			if( ans3.contains(touchPoint) ) {
 				sound.playSoundCorrect();
-				game.setScreen(new Question_4(game));
-				dispose();
+				this.dispose();
+				game.setScreen(new MainMenuScreen(game));
 			}
 			
-			if(ans3.contains(touchPoint))
-			{
+			if( ans4.contains(touchPoint) ) {
 				sound.playSoundNope();
-				lives.wrong();
-			}
-			
-			if(ans4.contains(touchPoint))
-			{
-				sound.playSoundNope();
-				lives.wrong();
-			}
-			
-			if(skipButton.contains(touchPoint) && skip.canSkip())
-			{
-				sound.playSkipSound();
-				skip.useSkip();
-				game.setScreen(new Question_4(game));
-				dispose();
+				this.dispose();
+				game.setScreen(new MainMenuScreen(game));
 			}
 			
 //			System.out.println(lives.hp);
 //			System.out.println(lives.getLives());
 //			System.out.println(lives.isLive());
 		}
-		if(!lives.isLive())
-		{
-			game.setScreen(new Fail(game));
-			dispose();
-		}
 	}
 	
-	private void render()
-	{
+	private void render() {
 		batch.begin();
-		batch.draw(question_3, 0, 0);
+		batch.draw(finalPic, 0, 0);
 		batch.end();
-		lives.renderLives();
-		skip.renderSkip();
 	}
 }
