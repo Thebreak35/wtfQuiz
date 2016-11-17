@@ -51,6 +51,7 @@ public class Question_15 extends ScreenAdapter{
 		if( ( tEnd - tStart ) / 1000 > 10) {
 			changeQuestion();
 			if(( tEnd - tStart ) / 1000 > 12) {
+				sound.playSoundCorrect();
 				game.setScreen(new Question_16(game));
 				dispose();
 			}

@@ -56,7 +56,7 @@ public class Question_17 extends ScreenAdapter{
 			touchPoint.x = Gdx.input.getX();
 			touchPoint.y = Gdx.input.getY();
 			
-			System.out.println(touchPoint);
+//			System.out.println(touchPoint);
 			
 			
 			if( trueAnswer.contains(touchPoint) ) {
