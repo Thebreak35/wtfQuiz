@@ -60,10 +60,7 @@ public class Question_15 extends ScreenAdapter{
 		if(Gdx.input.justTouched())
 		{
 			touchPoint.x = Gdx.input.getX();
-			touchPoint.y = Gdx.input.getY();
-			
-//			System.out.println(touchPoint);
-			
+			touchPoint.y = Gdx.input.getY();	
 			
 			if(ans1.contains(touchPoint))
 			{
