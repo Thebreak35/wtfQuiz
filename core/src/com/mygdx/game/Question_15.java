@@ -56,6 +56,7 @@ public class Question_15 extends ScreenAdapter{
 				dispose();
 			}
 		}
+		
 		if(Gdx.input.justTouched())
 		{
 			touchPoint.x = Gdx.input.getX();
@@ -83,6 +84,12 @@ public class Question_15 extends ScreenAdapter{
 				game.setScreen(new Question_16(game));
 				dispose();
 			}
+		}
+		
+		if(!lives.isLive())
+		{
+			game.setScreen(new Fail(game));
+			dispose();
 		}
 	}
 	
