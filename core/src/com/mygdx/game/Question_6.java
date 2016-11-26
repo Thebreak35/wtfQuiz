@@ -16,18 +16,17 @@ public class Question_6 extends ScreenAdapter{
 	Lives lives;
 	Skip skip;
 	SoundFx sound;
-	
+
 	Rectangle ans1,ans2,ans3,ans4,skipButton;
 	Vector2 touchPoint;
-	public Question_6(Game game)
-	{
+	public Question_6(Game game) {
 		this.game = game;
 		batch = new SpriteBatch();
 		lives = new Lives();
 		question_6 = new Texture("question_6.png");
 		skip = new Skip();
 		sound = new SoundFx();
-		
+
 		touchPoint = new Vector2();
 		ans1 = new Rectangle( 130, 400 - 120, 300, 120);
 		ans2 = new Rectangle( 625, 400 - 120, 300, 120);
@@ -35,79 +34,61 @@ public class Question_6 extends ScreenAdapter{
 		ans4 = new Rectangle( 625, 400 - 120 + 175, 300, 120);
 		skipButton = new Rectangle(180 + 700,720 - 60 - 20 ,150 ,60);
 	}
-	
+
 	@Override
-	public void render(float delta)
-	{
+	public void render(float delta) {
 		update();
-		
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	
+
 		render();
 	}
-	
-	private void update()
-	{
-		if(Gdx.input.isKeyJustPressed(Keys.R))
-		{
+
+	private void update() {
+		if (Gdx.input.isKeyJustPressed(Keys.R)) {
 			sound.playSoundCorrect();
 			game.setScreen(new Question_7(game));
 			dispose();
 		}
-		if(Gdx.input.justTouched())
-		{
+		if (Gdx.input.justTouched()) {
 			touchPoint.x = Gdx.input.getX();
 			touchPoint.y = Gdx.input.getY();
-			
-//			System.out.println(touchPoint);
-			
-			
-			if(ans1.contains(touchPoint))
-			{
+
+			if (ans1.contains(touchPoint)) {
 				sound.playSoundNope();
 				lives.wrong();
 			}
-			
-			if(ans2.contains(touchPoint))
-			{
+
+			if (ans2.contains(touchPoint)) {
 				sound.playSoundNope();
 				lives.wrong();
 			}
-			
-			if(ans3.contains(touchPoint))
-			{
+
+			if (ans3.contains(touchPoint)) {
 				sound.playSoundNope();
 				lives.wrong();
 			}
-			
-			if(ans4.contains(touchPoint))
-			{
+
+			if (ans4.contains(touchPoint)) {
 				sound.playSoundNope();
 				lives.wrong();
 			}
-			
-			if(skipButton.contains(touchPoint) && skip.canSkip())
-			{
+
+			if (skipButton.contains(touchPoint) && skip.canSkip()) {
 				sound.playSkipSound();
 				skip.useSkip();
 				game.setScreen(new Question_7(game));
 				dispose();
 			}
-			
-//			System.out.println(lives.hp);
-//			System.out.println(lives.getLives());
-//			System.out.println(lives.isLive());
 		}
-		if(!lives.isLive())
-		{
+		if (!lives.isLive()) {
 			game.setScreen(new Fail(game));
 			dispose();
 		}
 	}
-	
-	private void render()
-	{
+
+	private void render() {
 		batch.begin();
 		batch.draw(question_6, 0, 0);
 		batch.end();

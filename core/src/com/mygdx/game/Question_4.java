@@ -15,19 +15,18 @@ public class Question_4 extends ScreenAdapter{
 	Lives lives;
 	Skip skip;
 	SoundFx sound;
-	
+
 	Rectangle ans1,ans2,ans3,ans4,skipButton;
 	Vector2 touchPoint;
-	
-	public Question_4(Game game)
-	{
+
+	public Question_4(Game game) {
 		this.game = game;
 		batch = new SpriteBatch();
 		question_4 = new Texture("question_4.png");
 		lives = new Lives();
 		skip = new Skip();
 		sound = new SoundFx();
-		
+
 		touchPoint = new Vector2();
 		ans1 = new Rectangle( 130, 400 - 120, 300, 120);
 		ans2 = new Rectangle( 625, 400 - 120, 300, 120);
@@ -37,72 +36,56 @@ public class Question_4 extends ScreenAdapter{
 	}
 
 	@Override
-	public void render(float delta)
-	{
+	public void render(float delta) {
 		update();
-		
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
 		render();
 	}
-	
-	private void update()
-	{
-		if(Gdx.input.justTouched())
-		{
+
+	private void update() {
+		if (Gdx.input.justTouched()) {
 			touchPoint.x = Gdx.input.getX();
 			touchPoint.y = Gdx.input.getY();
-			
-//			System.out.println(touchPoint);
-			
-			
-			if(ans1.contains(touchPoint))
-			{
+
+			if (ans1.contains(touchPoint)) {
 				sound.playSoundNope();
 				lives.wrong();
 			}
-			
-			if(ans2.contains(touchPoint))
-			{
+
+			if (ans2.contains(touchPoint)) {
 				sound.playSoundNope();
 				lives.wrong();
 			}
-			
-			if(ans3.contains(touchPoint))
-			{
+
+			if (ans3.contains(touchPoint)) {
 				sound.playSoundCorrect();
 				game.setScreen(new Question_5(game));
 				dispose();
 			}
-			
-			if(ans4.contains(touchPoint))
-			{
+
+			if (ans4.contains(touchPoint)) {
 				sound.playSoundNope();
 				lives.wrong();
 			}
-			
-			if(skipButton.contains(touchPoint) && skip.canSkip())
-			{
+
+			if (skipButton.contains(touchPoint) && skip.canSkip()) {
 				sound.playSkipSound();
 				skip.useSkip();
 				game.setScreen(new Question_5(game));
 				dispose();
 			}
-			
-//			System.out.println(lives.hp);
-//			System.out.println(lives.getLives());
-//			System.out.println(lives.isLive());
 		}
-		if(!lives.isLive())
-		{
+
+		if (!lives.isLive()) {
 			game.setScreen(new Fail(game));
 			dispose();
 		}
 	}
-	
-	private void render()
-	{
+
+	private void render() {
 		batch.begin();
 		batch.draw(question_4, 0, 0);
 		batch.end();

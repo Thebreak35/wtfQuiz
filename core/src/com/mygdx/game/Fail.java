@@ -13,46 +13,39 @@ public class Fail extends ScreenAdapter{
 	Lives lives;
 	Skip skip;
 	SoundFx sound;
-	
-	public Fail(Game game)
-	{
+
+	public Fail(Game game) {
 		this.game = game;
 		batch = new SpriteBatch();
 		bg = new Texture("fail.png");
 		lives = new Lives();
 		skip = new Skip();
 		sound = new SoundFx();
-		
+
 		sound.playSoundSad(1);
 	}
-	
+
 	@Override
-	public void render(float delta)
-	{
+	public void render(float delta) {
 		update();
-		
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-	
+
 		render();
 	}
-	
-	
-	private void update()
-	{
-		if(Gdx.input.justTouched())
-		{
+
+	private void update() {
+		if (Gdx.input.justTouched()) {
 			sound.playSoundSad(0);
 			lives.setNewLives();
 			skip.setNewSkip();
-//			this.dispose();
 			dispose();
 			game.setScreen(new MainMenuScreen(game));
 		}
 	}
 
-	private void render()
-	{
+	private void render() {
 		batch.begin();
 		batch.draw(bg, 0, 0);
 		batch.end();
